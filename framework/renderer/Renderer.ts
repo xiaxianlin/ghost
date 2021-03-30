@@ -1,5 +1,5 @@
 import Scene from '../scene/Scene'
-import { RendererOptions } from '../types/Options'
+import { RendererOptions } from '../types/Renderer'
 
 class Renderer {
     private _container: HTMLElement | null
