@@ -1,0 +1,35 @@
+{
+    "name": "ghost",
+    "version": "1.0.0",
+    "main": "dist/library.js",
+    "module": "lib/index.js",
+    "author": "xiaxianlin <dreamtimefly@gmail.com>",
+    "license": "MIT",
+    "config": {
+        "library": "Library",
+        "host": "localhost",
+        "port": "5050"
+    },
+    "scripts": {
+        "start": "webpack-serve webpack.config.js",
+        "build": "tsc --build"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/node": "^10.12.21",
+        "awesome-typescript-loader": "^5.2.1",
+        "css-loader": "^5.2.0",
+        "node-sass": "^5.0.0",
+        "sass-loader": "^11.0.1",
+        "source-map-loader": "^0.2.4",
+        "style-loader": "^2.0.0",
+        "tslint": "^5.12.1",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^3.3.1",
+        "typescript-tslint-plugin": "^0.3.1",
+        "webpack": "^4.29.3",
+        "webpack-cli": "^3.2.3",
+        "webpack-serve": "^2.0.3",
+        "worker-loader": "^2.0.0"
+    }
+}
