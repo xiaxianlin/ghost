@@ -1,3 +1,3 @@
 import IShape from '../interface/IShape'
 
-export type ShapePosition = IShape | number
+export type ShapePosition = IShape | string

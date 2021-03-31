@@ -1,13 +1,26 @@
-import { ShapePosition } from '../types/Scene'
+import ILayer from './ILayer'
 import IShape from './IShape'
 
 interface IScene {
     /**
-     * 添加图元，返回图元在场景的位置
-     * @param shape 图形
+     * 添加图元
      */
-    add(shape: IShape): number
-    remove(shape: ShapePosition): boolean
+    addShape(shape: IShape): void
+    /**
+     * 删除图元
+     */
+    removeShape(shapeId: string): boolean
+
+    /**
+     * 添加层
+     */
+    addLayer(layer: ILayer): void
+    /**
+     * 删除层
+     */
+    removeLayer(layerId: string): boolean
+
+    draw(ctx: CanvasRenderingContext2D, width: number, height: number): void
 }
 
 export default IScene
