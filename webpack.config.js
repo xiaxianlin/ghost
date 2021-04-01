@@ -13,7 +13,7 @@ module.exports = {
     mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
 
     entry: {
-        loader: './src/index.ts',
+        loader: './demo/index.ts',
     },
 
     output: {

@@ -1,4 +1,4 @@
-import { IRotate } from '../interface/ITransform'
+import { IRotate } from '../../struct/interfaces/ITransform'
 
 class Rotate implements IRotate {
     x: number = 0

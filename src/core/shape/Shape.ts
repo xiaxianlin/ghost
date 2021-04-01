@@ -1,10 +1,10 @@
+import { IPosition, ISize } from '../../struct/interfaces/IAttribute'
+import IShape from '../../struct/interfaces/IShape'
+import ITransform from '../../struct/interfaces/ITransform'
+import StringUtils from '../../utils/StringUtils'
 import Position from '../attribute/Postion'
 import Size from '../attribute/Size'
-import { IPosition, ISize } from '../interface/IAttribute'
-import IShape from '../interface/IShape'
-import ITransform from '../interface/ITransform'
 import Transform from '../transform/Transform'
-import StringUtils from '../utils/StringUtils'
 
 abstract class Shape<T> implements IShape<T> {
     protected _canvas: HTMLCanvasElement | null = null

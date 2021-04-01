@@ -1,4 +1,4 @@
-import { ISize } from '../interface/IAttribute'
+import { ISize } from '../../struct/interfaces/IAttribute'
 
 class Size implements ISize {
     width: number = 0

@@ -1,5 +1,5 @@
-import ITransform, { IRotate, IScale, ISkew, ITranslate } from '../interface/ITransform'
-import { TransformSetOptions } from '../types/Transform'
+import ITransform, { IRotate, IScale, ISkew, ITranslate } from '../../struct/interfaces/ITransform'
+import { TransformSetOptions } from '../../struct/types/Transform'
 import Rotate from './Rotate'
 import Scale from './Scale'
 import Skew from './Skew'

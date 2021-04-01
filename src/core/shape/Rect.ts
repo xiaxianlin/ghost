@@ -1,8 +1,8 @@
+import RectDrawer from '../../drawer/RectDrawer'
+import { IRectAttribute } from '../../struct/interfaces/IAttribute'
+import { RectOptions } from '../../struct/types/Shape'
+import CanvasUtils from '../../utils/CanvasUtils'
 import RectAttribute from '../attribute/RectAttibute'
-import RectDrawer from '../drawer/RectDrawer'
-import { IRectAttribute } from '../interface/IAttribute'
-import { RectOptions } from '../types/Shape'
-import CanvasUtils from '../utils/CanvasUtils'
 import Polygon from './Polygon'
 
 class Rect extends Polygon<IRectAttribute> {

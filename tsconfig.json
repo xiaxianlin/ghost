@@ -15,5 +15,5 @@
             }
         ]
     },
-    "include": ["src", "framework", "typings"]
+    "include": ["src", "demo", "typings"]
 }

@@ -1,8 +1,8 @@
-import IAttribute from '../interface/IAttribute'
-import ILayer from '../interface/ILayer'
-import IScene from '../interface/IScene'
-import IShape from '../interface/IShape'
-import { Visitor } from '../types/Common'
+import IAttribute from '../../struct/interfaces/IAttribute'
+import ILayer from '../../struct/interfaces/ILayer'
+import IScene from '../../struct/interfaces/IScene'
+import IShape from '../../struct/interfaces/IShape'
+import { Visitor } from '../../struct/types/Common'
 import Layer from './Layer'
 
 class Scene implements IScene {
@@ -32,7 +32,8 @@ class Scene implements IScene {
         return data.length > 0
     }
 
-    shapeEach(visit: Visitor<IShape<IAttribute>>): void {
+    
+    (visit: Visitor<IShape<IAttribute>>): void {
         this._layers.forEach((layer) => layer.shapeEach((value) => visit(value)))
     }
 }

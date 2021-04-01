@@ -1,4 +1,4 @@
-import Rect from '../shape/Rect'
+import Rect from '../core/shape/Rect'
 import AbstractDrawer from './Drawer'
 
 class RectDrawer extends AbstractDrawer {

@@ -1,4 +1,5 @@
-import { ISkew } from '../interface/ITransform'
+
+import { ISkew } from '../../struct/interfaces/ITransform'
 
 class Skew implements ISkew {
     x: number = 0

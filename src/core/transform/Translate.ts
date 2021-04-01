@@ -1,4 +1,4 @@
-import { ITranslate } from '../interface/ITransform'
+import { ITranslate } from '../../struct/interfaces/ITransform'
 
 class Translate implements ITranslate {
     x: number = 0

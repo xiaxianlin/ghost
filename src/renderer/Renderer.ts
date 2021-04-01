@@ -1,6 +1,6 @@
+import Scene from '../core/scene/Scene'
 import DrawerFactory from '../drawer/Factory'
-import Scene from '../scene/Scene'
-import { RendererOptions } from '../types/Renderer'
+import { RendererOptions } from '../struct/Renderer'
 
 class Renderer {
     private _container: HTMLElement

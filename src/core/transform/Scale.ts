@@ -1,4 +1,4 @@
-import { IScale } from '../interface/ITransform'
+import { IScale } from '../../struct/interfaces/ITransform'
 
 class Scale implements IScale {
     x: number = 1

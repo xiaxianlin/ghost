@@ -1,8 +1,8 @@
-import IAttribute from '../interface/IAttribute'
-import ILayer from '../interface/ILayer'
-import IShape from '../interface/IShape'
-import { Visitor } from '../types/Common'
-import StringUtils from '../utils/StringUtils'
+import IAttribute from '../../struct/interfaces/IAttribute'
+import ILayer from '../../struct/interfaces/ILayer'
+import IShape from '../../struct/interfaces/IShape'
+import { Visitor } from '../../struct/types/Common'
+import StringUtils from '../../utils/StringUtils'
 
 class Layer implements ILayer {
     private _shapes: Map<string, IShape<IAttribute>> = new Map()

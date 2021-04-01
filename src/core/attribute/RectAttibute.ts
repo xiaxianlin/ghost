@@ -1,4 +1,4 @@
-import { IRectAttribute } from '../interface/IAttribute'
+import { IRectAttribute } from '../../struct/interfaces/IAttribute'
 
 class RectAttribute implements IRectAttribute {
     x: number = 0

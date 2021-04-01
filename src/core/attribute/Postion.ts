@@ -1,4 +1,4 @@
-import { IPosition } from '../interface/IAttribute'
+import { IPosition } from '../../struct/interfaces/IAttribute'
 
 class Position implements IPosition {
     x: number = 0
