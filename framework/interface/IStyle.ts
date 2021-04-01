@@ -1,34 +1,34 @@
 import { TextAlign, TextVerticalAlign } from '../types/Style'
 
 export interface IBorder {
-    color?: string
-    width?: number
-    style?: string
-    radius?: number
+    readonly color?: string
+    readonly width?: number
+    readonly style?: string
+    readonly radius?: number
 }
 
 export interface IBackground {
-    color?: string
+    readonly color?: string
 }
 
 export interface IFont {
-    size?: number
-    family?: string
-    weight?: number
-    style?: string
+    readonly size?: number
+    readonly family?: string
+    readonly weight?: number
+    readonly style?: string
 }
 
 export interface ITextStyle {
-    color?: string
-    font?: IFont
-    lineHeight?: number
-    align?: TextAlign
-    verticalAlign?: TextVerticalAlign
+    readonly color?: string
+    readonly font?: IFont
+    readonly lineHeight?: number
+    readonly align?: TextAlign
+    readonly verticalAlign?: TextVerticalAlign
 }
 
 interface IStyle {
-    border?: IBorder
-    background?: IBackground
+    readonly border?: IBorder
+    readonly background?: IBackground
 }
 
 export default IStyle

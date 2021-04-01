@@ -1,18 +1,41 @@
-import { IRect, IRectAttribute } from '../interface/IShape'
+import RectAttribute from '../attribute/RectAttibute'
+import RectDrawer from '../drawer/RectDrawer'
+import { IRectAttribute } from '../interface/IAttribute'
+import { RectOptions } from '../types/Shape'
+import CanvasUtils from '../utils/CanvasUtils'
 import Polygon from './Polygon'
 
-class Rect extends Polygon implements IRect {
-    attribute: IRectAttribute = {
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0,
-    }
-    constructor(options?: IRectAttribute) {
+class Rect extends Polygon<IRectAttribute> {
+    private _drawer: RectDrawer
+
+    constructor(options?: RectOptions) {
         super()
         if (options) {
-            this.attribute = options
+            let { x, y, width, height } = options
+            this.attribute = new RectAttribute(x, y, width, height)
         }
+        let { x, y, width, height } = this.attribute
+        this.size.setSize(width, height)
+        this.absolutePosition.setPosition(x, y)
+
+        let { canvas, ctx } = CanvasUtils.createContext(this.attribute.width, this.attribute.height)
+        this._canvas = canvas
+        this._ctx = ctx
+        this._drawer = new RectDrawer(this._ctx)
+        this.draw()
+    }
+
+    protected draw() {
+        if (!this._ctx) return
+        this._ctx.clearRect(0, 0, this.attribute.width, this.attribute.height)
+        this._drawer.draw(this)
+    }
+
+    getImage() {
+        if (!this._canvas) {
+            throw `Rect [${this.id}]：canvas is missing`
+        }
+        return this._canvas
     }
 }
 

@@ -11,9 +11,11 @@ const scene = new Scene()
 // // 创建矩形
 // const rect = new Rect({ x: 100, y: 100, width: 400, height: 300 })
 // scene.addShape(rect)
+
+// 大批量节点数据测试
 let now = Date.now()
-for (let i = 0; i < 1000; i++) {
-    const rect = new Rect({ x: Math.random() * 1348, y: Math.random() * 950, width: 20, height: 15 })
+for (let i = 0; i < 8000; i++) {
+    const rect = new Rect({ x: Math.random() * 1348, y: Math.random() * 950, width: 20, height: 20 })
     scene.addShape(rect)
 }
 

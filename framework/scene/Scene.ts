@@ -1,7 +1,9 @@
+import IAttribute from '../interface/IAttribute'
 import ILayer from '../interface/ILayer'
 import IScene from '../interface/IScene'
 import IShape from '../interface/IShape'
-import Layer from '../layer/Layer'
+import { Visitor } from '../types/Common'
+import Layer from './Layer'
 
 class Scene implements IScene {
     private _layers: ILayer[] = []
@@ -11,7 +13,7 @@ class Scene implements IScene {
         this.addLayer(new Layer())
     }
 
-    addShape(shape: IShape): void {
+    addShape(shape: IShape<IAttribute>): void {
         this._layers[0].add(shape)
     }
 
@@ -30,10 +32,8 @@ class Scene implements IScene {
         return data.length > 0
     }
 
-    draw(ctx: CanvasRenderingContext2D, width: number, height: number): void {
-        this._layers.forEach((layer) => {
-            ctx.drawImage(layer.getImage(), 0, 0, width, height)
-        })
+    shapeEach(visit: Visitor<IShape<IAttribute>>): void {
+        this._layers.forEach((layer) => layer.shapeEach((value) => visit(value)))
     }
 }
 

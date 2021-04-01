@@ -1,4 +1,5 @@
-import IShape, { IRect } from '../interface/IShape'
+import IAttribute from '../interface/IAttribute'
+import IShape from '../interface/IShape'
 import Rect from '../shape/Rect'
 import RectDrawer from './RectDrawer'
 
@@ -9,9 +10,9 @@ class DrawerFactory {
         this._rectDrawer = new RectDrawer(ctx)
     }
 
-    draw(shape: IShape) {
+    draw(shape: IShape<IAttribute>) {
         if (shape instanceof Rect) {
-            return this._rectDrawer.draw(shape as IRect)
+            return this._rectDrawer.draw(shape as Rect)
         }
     }
 }

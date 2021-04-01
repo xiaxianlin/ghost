@@ -1,3 +1,5 @@
+import { Visitor } from '../types/Common'
+import IAttribute from './IAttribute'
 import ILayer from './ILayer'
 import IShape from './IShape'
 
@@ -5,7 +7,7 @@ interface IScene {
     /**
      * 添加图元
      */
-    addShape(shape: IShape): void
+    addShape(shape: IShape<IAttribute>): void
     /**
      * 删除图元
      */
@@ -20,7 +22,7 @@ interface IScene {
      */
     removeLayer(layerId: string): boolean
 
-    draw(ctx: CanvasRenderingContext2D, width: number, height: number): void
+    shapeEach(visit: Visitor<IShape<IAttribute>>): void
 }
 
 export default IScene

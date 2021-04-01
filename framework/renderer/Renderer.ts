@@ -37,9 +37,12 @@ class Renderer {
     }
 
     render(scene: Scene) {
-        let { width, height } = this._canvas
         this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height)
-        scene.draw(this._ctx, width, height)
+        scene.shapeEach((shape) => {
+            let { x, y } = shape.absolutePosition
+            let { width, height } = shape.size
+            this._ctx.drawImage(shape.getImage(), x, y, width, height)
+        })
     }
 }
 

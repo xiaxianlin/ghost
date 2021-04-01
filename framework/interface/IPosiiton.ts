@@ -6,6 +6,14 @@ export interface IPackingSpace {
     y: number
     width: number
     height: number
+    
+    setX(x: number): void
+    setY(y: number): void
+    setWidth(width: number): void
+    setHeight(height: number): void
+    setPosition(x: number, y: number): void
+    setArea(width: number, height: number): void
+    set(x: number, y: number, width: number, height: number): void
 }
 
 /**

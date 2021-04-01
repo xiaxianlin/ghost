@@ -1,11 +1,13 @@
-import { IPackingSpace } from './ICore'
+import { Visitor } from '../types/Common'
+import IAttribute from './IAttribute'
 import IShape from './IShape'
 
-interface ILayer extends IPackingSpace {
-    id: string
-    add(shape: IShape): void
+interface ILayer {
+    readonly id: string
+    add(shape: IShape<IAttribute>): void
     remove(id: string): boolean
-    getImage(): HTMLCanvasElement
+
+    shapeEach(visit: Visitor<IShape<IAttribute>>): void
 }
 
 export default ILayer
