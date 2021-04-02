@@ -1,12 +1,12 @@
-import { IPosition, ISize } from './IAttribute'
+import IAttribute, { IPosition, ISize } from './IAttribute'
+import { IElement } from './ICore'
 import IStyle from './IStyle'
 import ITransform from './ITransform'
 
 /**
  * 图元接口
  */
-interface IShape<T> {
-    readonly id: string
+interface IShape<T> extends IElement {
     readonly layerId: string
     readonly groupId: string
     // 属性
@@ -26,7 +26,15 @@ interface IShape<T> {
     /**
      * 获取图元画布
      */
-    getImage(): HTMLCanvasElement
+    getImage(): ImageBitmap | null
+}
+
+/**
+ * 分组图元
+ */
+export interface IGroup<T> extends IShape<T> {
+    add(shape: IShape<IAttribute>): void
+    remove(id: string): boolean
 }
 
 /**

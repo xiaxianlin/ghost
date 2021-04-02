@@ -7,10 +7,7 @@ import Size from '../attribute/Size'
 import Transform from '../transform/Transform'
 
 abstract class Shape<T> implements IShape<T> {
-    protected _canvas: HTMLCanvasElement | null = null
-    protected _ctx: CanvasRenderingContext2D | null = null
-
-    id: string = StringUtils.idGenerator(8)
+    id: string = ''
     layerId: string = ''
     groupId: string = ''
     attribute: T = {} as T
@@ -19,7 +16,9 @@ abstract class Shape<T> implements IShape<T> {
     relativePosition: IPosition = new Position()
     absolutePosition: IPosition = new Position()
 
-    protected abstract draw(): void
+    constructor() {
+        this.id = StringUtils.idGenerator(8)
+    }
 
     setLayerId(id: string): void {
         this.layerId = id
@@ -29,7 +28,7 @@ abstract class Shape<T> implements IShape<T> {
         this.groupId = id
     }
 
-    abstract getImage(): HTMLCanvasElement
+    abstract getImage(): ImageBitmap | null
 }
 
 export default Shape

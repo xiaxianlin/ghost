@@ -21,6 +21,8 @@ export interface ISize {
     setSize(width: number, height: number): void
 }
 
+export interface IGroupAttribute extends IAttribute {}
+
 /**
  * 矩形属性
  */

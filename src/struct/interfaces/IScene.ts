@@ -1,9 +1,8 @@
-import { Visitor } from '../types/Common'
 import IAttribute from './IAttribute'
-import ILayer from './ILayer'
+import { IElement } from './ICore'
 import IShape from './IShape'
 
-interface IScene {
+interface IScene extends IElement {
     /**
      * 添加图元
      */
@@ -21,8 +20,11 @@ interface IScene {
      * 删除层
      */
     removeLayer(layerId: string): boolean
+}
 
-    shapeEach(visit: Visitor<IShape<IAttribute>>): void
+export interface ILayer extends IElement {
+    add(shape: IShape<IAttribute>): void
+    remove(id: string): boolean
 }
 
 export default IScene

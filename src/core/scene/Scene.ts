@@ -1,40 +1,27 @@
 import IAttribute from '../../struct/interfaces/IAttribute'
-import ILayer from '../../struct/interfaces/ILayer'
-import IScene from '../../struct/interfaces/IScene'
+import IScene, { ILayer } from '../../struct/interfaces/IScene'
 import IShape from '../../struct/interfaces/IShape'
-import { Visitor } from '../../struct/types/Common'
+import StringUtils from '../../utils/StringUtils'
 import Layer from './Layer'
 
 class Scene implements IScene {
-    private _layers: ILayer[] = []
+    id: string = ''
 
     constructor() {
-        this._layers = []
+        this.id = StringUtils.idGenerator(8)
         this.addLayer(new Layer())
     }
 
-    addShape(shape: IShape<IAttribute>): void {
-        this._layers[0].add(shape)
-    }
+    addShape(shape: IShape<IAttribute>): void {}
 
     removeShape(id: string): boolean {
-        return this._layers[0].remove(id)
+        return false
     }
 
-    addLayer(layer: ILayer): void {
-        this._layers.push(layer)
-    }
+    addLayer(layer: ILayer): void {}
 
     removeLayer(id: string): boolean {
-        let index = this._layers.findIndex((layer) => layer.id === id)
-        if (index < 0) return false
-        let data = this._layers.splice(index, 1)
-        return data.length > 0
-    }
-
-    
-    (visit: Visitor<IShape<IAttribute>>): void {
-        this._layers.forEach((layer) => layer.shapeEach((value) => visit(value)))
+        return false
     }
 }
 
