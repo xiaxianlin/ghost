@@ -1,4 +1,4 @@
-import Layer from '../core/scene/Layer'
+import Layer from '../core/Layer'
 
 class LayerDrawer {
     draw(layers: Layer[]): void {}

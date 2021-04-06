@@ -1,13 +1,11 @@
-import Scene from '../core/scene/Scene'
-import DrawerFactory from '../drawer/Factory'
-import { RendererOptions } from '../struct/Renderer'
+import Scene from '../core/Scene'
+import { RendererOptions } from '../struct/types/Renderer'
 
 class Renderer {
-    private _container: HTMLElement
-    private _canvas: HTMLCanvasElement
-    private _options: RendererOptions = {}
-    private _ctx: CanvasRenderingContext2D
-    private _drawerFactory: DrawerFactory
+    private container: HTMLElement
+    private canvas: HTMLCanvasElement
+    private options: RendererOptions = {}
+    private ctx: CanvasRenderingContext2D
 
     private handleOptions(options: RendererOptions = {}): RendererOptions {
         return Object.assign({ width: document.body.offsetWidth, height: document.body.offsetHeight }, options)
@@ -17,32 +15,23 @@ class Renderer {
         if (!container) {
             throw 'container is null'
         }
-        this._container = container
-
-        this._options = this.handleOptions(options)
-
-        this._canvas = document.createElement('canvas')
-        this._canvas.width = this._options.width || 0
-        this._canvas.height = this._options.height || 0
-
-        let ctx = this._canvas.getContext('2d')
+        this.container = container
+        // 处理参数选项
+        this.options = this.handleOptions(options)
+        // 初始化画布
+        this.canvas = document.createElement('canvas')
+        this.canvas.width = this.options.width || 0
+        this.canvas.height = this.options.height || 0
+        let ctx = this.canvas.getContext('2d')
         if (!ctx) {
             throw '2d context is null'
         }
-        this._ctx = ctx
-
-        this._drawerFactory = new DrawerFactory(this._ctx)
-
-        this._container.appendChild(this._canvas)
+        this.ctx = ctx
+        this.container.appendChild(this.canvas)
     }
 
     render(scene: Scene) {
-        this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height)
-        scene.shapeEach((shape) => {
-            let { x, y } = shape.absolutePosition
-            let { width, height } = shape.size
-            this._ctx.drawImage(shape.getImage(), x, y, width, height)
-        })
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
 }
 

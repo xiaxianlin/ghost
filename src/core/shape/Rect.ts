@@ -15,7 +15,7 @@ class Rect extends Polygon<IRectAttribute> {
         this.absolutePosition.setPosition(x, y)
     }
 
-    getImage() {
+    getImageInfo() {
         return null
     }
 }

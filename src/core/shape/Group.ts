@@ -1,25 +1,26 @@
 import IAttribute, { IGroupAttribute } from '../../struct/interfaces/IAttribute'
-import IShape, { IGroup } from '../../struct/interfaces/IShape'
-import StringUtils from '../../utils/StringUtils'
-import Shape from './Shape'
+import { IShape } from '../../struct/interfaces/ICore'
+import { IGroup } from '../../struct/interfaces/IShape'
+import Shape from '../Shape'
 
 class Group<T> extends Shape<T> implements IGroup<IGroupAttribute> {
-    id: string = ''
+    protected shapes: Map<string, IShape<IAttribute>>
 
     constructor() {
         super()
-        this.id = StringUtils.idGenerator(8)
+        this.shapes = new Map()
     }
 
     add(shape: IShape<IAttribute>) {
-        shape.setGroupId(this.id)
+        shape.setLayerId(this.id)
+        this.shapes.set(shape.id, shape)
     }
 
     remove(id: string): boolean {
-        return false
+        return this.shapes.delete(id)
     }
 
-    getImage() {
+    getImageInfo() {
         return null
     }
 }

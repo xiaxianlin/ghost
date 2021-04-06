@@ -1,6 +1,6 @@
 import IAttribute from '../struct/interfaces/IAttribute'
+import { IShape } from '../struct/interfaces/ICore'
 import IDrawer from '../struct/interfaces/IDrawer'
-import IShape from '../struct/interfaces/IShape'
 
 abstract class Drawer implements IDrawer {
     protected _ctx: CanvasRenderingContext2D
@@ -13,4 +13,3 @@ abstract class Drawer implements IDrawer {
 }
 
 export default Drawer
-

@@ -1,5 +1,5 @@
-declare interface TypedWorker<M, R> {
-    new (): TypedWorker<M, R>
+declare interface IDrawerWorker<M, R> {
+    new (): IDrawerWorker<M, R>
     postMessage(data: M): void
     addEventListener(type: 'message', listener: (event: { data: R }) => void): void
     addEventListener(type: 'error', listener: (event: ErrorEvent) => void): void
@@ -8,7 +8,7 @@ declare interface TypedWorker<M, R> {
     terminate(): void
 }
 
-declare interface TypedWorkerContext<M, R> {
+declare interface IDrawerWorkerContext<M, R> {
     postMessage(data: R): void
     addEventListener(type: 'message', listener: (event: { data: M }) => void): void
     addEventListener(type: 'error', listener: (event: ErrorEvent) => void): void
