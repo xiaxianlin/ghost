@@ -1,13 +1,33 @@
+import { THREAD_INIT_COUNT, THREAD_MAX_COUNT } from '../core/common/Constant'
 import IScheduler, { IThread } from '../struct/interfaces/IScheduler'
+import Thread from './Thread'
 
 class Scheduler implements IScheduler {
-    private maxThreadCount = 5
-    private threads: Map<string, IThread>
-    private init() {}
+    private maxCount = THREAD_MAX_COUNT
+    private initCount = THREAD_INIT_COUNT
+    private threads: IThread[] // 线程池
+    private dataQueue: any[] // 数据队列
+    
+    private init() {
+        for (let i = 0; i < this.initCount; i++) {
+            let thread = new Thread()
+            this.threads.push(thread)
+        }
+    }
+
+    private prepare() {}
+
+    private update() {}
 
     constructor() {
-        this.threads = new Map()
+        this.threads = []
+        this.dataQueue = []
+        this.init()
     }
+
+    work() {}
+
+    commit() {}
 }
 
 class ScedulerBuilder {

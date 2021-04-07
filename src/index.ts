@@ -1,10 +1,10 @@
 import Scene from './core/Scene'
 import Rect from './core/shape/Rect'
-import Renderer from './renderer/Renderer'
+import CanvasRenderer from './renderer/CanvasRenderer'
 
 const Ghost = {
     Scene: Scene,
-    Renderer: Renderer,
+    Renderer: CanvasRenderer,
 
     // shapes
     Rect: Rect,

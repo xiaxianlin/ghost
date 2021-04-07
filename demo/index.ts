@@ -1,4 +1,4 @@
-import Ghost from './Ghost'
+import Ghost from '../src'
 
 const { Rect, Renderer, Scene } = Ghost
 
@@ -16,9 +16,8 @@ const scene = new Scene()
 let now = Date.now()
 for (let i = 0; i < 2000; i++) {
     const rect = new Rect({ x: Math.random() * 1348, y: Math.random() * 950, width: 20, height: 20 })
-    scene.addShape(rect)
+    scene.add(rect)
 }
-
 // 渲染场景
 renderer.render(scene)
 

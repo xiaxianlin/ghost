@@ -1,4 +1,3 @@
-export enum LayerSource {
-    SYSTEM,
-    CUSTOM,
+export enum ShapeType {
+    POLYGON = 'polygon',
 }

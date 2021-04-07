@@ -1,22 +1,30 @@
-import { IDrawerMessage, IDrawerResult, IThread } from '../struct/interfaces/IScheduler'
-import { ThreadStatus } from '../struct/types/Scheduler'
+import { IThread } from '../struct/interfaces/IScheduler'
+import { DrawerWorkerMessage, DrawerWorkerResult, ThreadStatus } from '../struct/types/Scheduler'
 import DrawerWorker from '../workers/drawer.worker'
 
 class Thread implements IThread {
-    id: string = ''
-    worker: IDrawerWorker<IDrawerMessage, IDrawerResult> | null = null
-    status: ThreadStatus = ThreadStatus.NONE
+    worker: IDrawerWorker<DrawerWorkerMessage, DrawerWorkerResult> | null = null
+    status: ThreadStatus
 
-    private receive(data: IDrawerResult) {}
+    private receive(data: DrawerWorkerResult) {}
 
-    init() {
+    protected init() {
         if (!this.worker) return
         this.worker = new DrawerWorker()
         this.worker.addEventListener('message', (evt) => this.receive(evt.data))
     }
 
-    send(data: IDrawerMessage) {
+    constructor() {
+        this.status = ThreadStatus.FREE
+        this.init()
+    }
+
+    send(data: DrawerWorkerMessage) {
         this.worker?.postMessage(data)
+    }
+
+    setStatus(status: ThreadStatus): void {
+        this.status = status
     }
 }
 

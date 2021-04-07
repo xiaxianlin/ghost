@@ -1,13 +1,6 @@
-import { IPolygon } from '../../struct/interfaces/IShape'
-import IStyle from '../../struct/interfaces/IStyle'
-import Shape from '../Shape'
+import { IPolygon } from '../../struct/interfaces/IFigure'
+import Figure from '../Figure'
 
-abstract class Polygon<T> extends Shape<T> implements IPolygon<T> {
-    style: IStyle = {}
-
-    setStyle(style: IStyle): void {
-        this.style = style
-    }
-}
+abstract class Polygon<T> extends Figure<T> implements IPolygon<T> {}
 
 export default Polygon

@@ -1,15 +1,14 @@
 import { ThreadStatus } from '../types/Scheduler'
 
-export interface IDrawerMessage {}
-
-export interface IDrawerResult {}
-
 export interface IThread {
-    id: string
-    worker: IDrawerWorker<IDrawerMessage, IDrawerResult> | null
-    status: ThreadStatus
+    readonly status: ThreadStatus
+
+    setStatus(status: ThreadStatus): void
 }
 
-interface IScheduler {}
+interface IScheduler {
+    work(): void
+    commit(): void
+}
 
 export default IScheduler

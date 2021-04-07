@@ -1,23 +1,19 @@
 import { Visitor } from '../types/Common'
-import { LayerSource } from '../types/Core'
 import { ImageInfo } from '../types/Drawer'
-import IAttribute, { IPosition, ISize } from './IAttribute'
+import { IPosition, ISize } from './IAttribute'
+import IStyle from './IStyle'
 import ITransform from './ITransform'
 
 export interface IElement {
     readonly id: string
-
-    setId(id: string): void
-}
-
-/**
- * 图元接口
- */
-export interface IShape<T> extends IElement {
-    readonly layerId: string
-    readonly groupId: string
-    // 属性
-    readonly attribute: T
+    // 是否可见
+    readonly visible: boolean
+    // 是否在屏幕内
+    readonly inScreen: boolean
+    // 子元素集合
+    readonly children: IElement[]
+    // 父元素
+    readonly parent: IElement | null
     // 尺寸
     readonly size: ISize
     // 变换
@@ -27,39 +23,38 @@ export interface IShape<T> extends IElement {
     // 绝对位置
     readonly absolutePosition: IPosition
 
-    setLayerId(id: string): void
-    setGroupId(id: string): void
+    readonly isElement: boolean
 
-    /**
-     * 获取图元画布
-     */
-    getImageInfo(): ImageInfo | null
+    setId(id: string): void
+    setSize(width: number, height: number): void
+    setVisible(visible: boolean): void
+    setParent(parent: IElement | null): void
+
+    add(element: IElement): void
+    remove(element: IElement): void
+
+    traverse(callback: Visitor<IElement>): void
 }
 
-export interface ILayer extends IElement {
-    readonly isFull: boolean
-    readonly source: LayerSource
-    add(shape: IShape<IAttribute>): boolean
-    remove(id: string): boolean
-    forEach(visit: Visitor<IShape<IAttribute>>): void
+/**
+ * 图形元素
+ */
+export interface IFigure<T> extends IElement {
+    readonly isFigure: boolean
+    // 属性
+    readonly attribute: T
+
+    readonly style: IStyle
+
+    setStyle(style: IStyle): void
+
+    createImageInfo(): ImageInfo | null
 }
 
-export interface IScene {
-    /**
-     * 添加图元
-     */
-    addShape(shape: IShape<IAttribute>): void
-    /**
-     * 删除图元
-     */
-    removeShape(shapeId: string): boolean
-
-    /**
-     * 添加层
-     */
-    addLayer(layer: ILayer): void
-    /**
-     * 删除层
-     */
-    removeLayer(layerId: string): boolean
+/**
+ * 场景元素
+ */
+export interface IScene extends IElement {
+    readonly isScene: boolean
+    update(): void
 }

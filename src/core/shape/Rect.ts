@@ -1,9 +1,11 @@
 import { IRectAttribute } from '../../struct/interfaces/IAttribute'
-import { RectOptions } from '../../struct/types/Shape'
+import { ShapeType } from '../../struct/types/Core'
+import { ImageInfo } from '../../struct/types/Drawer'
+import { RectOptions } from '../../struct/types/Figure'
 import RectAttribute from '../attribute/RectAttibute'
-import Polygon from './Polygon'
+import Figure from '../Figure'
 
-class Rect extends Polygon<IRectAttribute> {
+class Rect extends Figure<IRectAttribute> {
     constructor(options?: RectOptions) {
         super()
         if (options) {
@@ -13,10 +15,21 @@ class Rect extends Polygon<IRectAttribute> {
         let { x, y, width, height } = this.attribute
         this.size.setSize(width, height)
         this.absolutePosition.setPosition(x, y)
+
+        this.imageInfo = this.createImageInfo()
     }
 
-    getImageInfo() {
-        return null
+    createImageInfo(): ImageInfo {
+        let { width, height } = this.size
+        return {
+            type: ShapeType.POLYGON,
+            paths: [
+                [0, 0],
+                [0, width],
+                [width, height],
+                [height, 0],
+            ],
+        }
     }
 }
 
