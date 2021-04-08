@@ -1,12 +1,12 @@
 import { IScene } from '../struct/interfaces/ICore'
 import IRenderer from '../struct/interfaces/IRenderer'
 import { RendererOptions } from '../struct/types/Renderer'
-import RenderState from './RenderState'
+import RenderFactory from './RenderFactory'
 
 abstract class Renderer implements IRenderer {
     protected container: HTMLElement
     protected options: RendererOptions = {}
-    protected renderState: RenderState
+    protected factory: RenderFactory
 
     protected handleOptions(options: RendererOptions = {}): RendererOptions {
         return Object.assign({ width: window.innerWidth, height: window.innerHeight }, options)
@@ -19,9 +19,12 @@ abstract class Renderer implements IRenderer {
         this.container = container
         // 处理参数选项
         this.options = this.handleOptions(options)
-
-        this.renderState = new RenderState()
+        // 注册工厂
+        this.factory = new RenderFactory()
+        this.factory.onComplete = () => this.handleComplete()
     }
+
+    protected abstract handleComplete(): void
 
     abstract render(scene: IScene): void
 }

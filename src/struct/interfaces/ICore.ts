@@ -1,39 +1,37 @@
 import { Visitor } from '../types/Common'
-import { ImageInfo } from '../types/Drawer'
-import { IPosition, ISize } from './IAttribute'
-import IStyle from './IStyle'
-import ITransform from './ITransform'
+import { DrawInfo } from '../types/Drawer'
 
 export interface IElement {
-    readonly id: string
+    // 主键
+    id: string
+    // 相对X轴位置
+    x: number
+    // 相对y轴位置
+    y: number
+    // 宽度
+    width: number
+    // 高度
+    height: number
     // 是否可见
-    readonly visible: boolean
-    // 是否在屏幕内
-    readonly inScreen: boolean
-    // 子元素集合
-    readonly children: IElement[]
+    visible: boolean
     // 父元素
-    readonly parent: IElement | null
-    // 尺寸
-    readonly size: ISize
-    // 变换
-    readonly transform: ITransform
-    // 相对位置
-    readonly relativePosition: IPosition
-    // 绝对位置
-    readonly absolutePosition: IPosition
-
+    parent: IElement | null
+    // 子元素
+    children: IElement[]
+    // 是否入屏
+    readonly inScreen: boolean
+    // 元素判断
     readonly isElement: boolean
-
-    setId(id: string): void
-    setSize(width: number, height: number): void
-    setVisible(visible: boolean): void
-    setParent(parent: IElement | null): void
-
+    // 添加元素
     add(element: IElement): void
+    // 移除元素
     remove(element: IElement): void
-
-    traverse(callback: Visitor<IElement>): void
+    // 清空元素
+    clear(): void
+    // 遍历自身以及子元素
+    traverse(callback: Visitor<IElement>, reverse?: boolean): void
+    // 获取绘制信息
+    getDrawInfo(): DrawInfo | null
 }
 
 /**
@@ -44,11 +42,7 @@ export interface IFigure<T> extends IElement {
     // 属性
     readonly attribute: T
 
-    readonly style: IStyle
-
-    setStyle(style: IStyle): void
-
-    createImageInfo(): ImageInfo | null
+    sceneId: string
 }
 
 /**

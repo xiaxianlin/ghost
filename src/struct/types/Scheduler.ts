@@ -1,15 +1,35 @@
-import { ImageInfo } from './Drawer'
+import IScheduler, { IThread } from '../interfaces/IScheduler'
+import { FigureImage } from './Figure'
+import { DrawerWorkerResult } from './Worker'
 
 export enum ThreadStatus {
-    NONE = 'none', // 未实例化
-    WAIT = 'wait', // 等待运行
-    PROCESS = 'PROCESS', // 运行中
-    FREE = '', // 空闲
+    FREE, // 空闲
+    PROCESSING, // 运行中
+}
+export enum ThreadEvent {
+    CHANGE = 'change',
 }
 
-export type DrawerWorkerMessage = {
-    canvas: OffscreenCanvas
-    imageInfo: ImageInfo
+export type ThreadEventMessage = {
+    target: IThread
+    data?: DrawerWorkerResult
 }
 
-export type DrawerWorkerResult = {}
+export type ThreadEventListenr = (e: ThreadEventMessage) => void
+
+export enum SchedulerStatus {
+    FREE,
+    WORK,
+}
+
+export enum SchedulerEvent {
+    CHANGE = 'change',
+    COMMIT = 'commit',
+}
+
+export type SchedulerEventMessage = {
+    target: IScheduler
+    data?: FigureImage[]
+}
+
+export type SchedulerEventListener = (e: SchedulerEventMessage) => void

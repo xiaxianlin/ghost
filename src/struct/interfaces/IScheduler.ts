@@ -1,14 +1,16 @@
-import { ThreadStatus } from '../types/Scheduler'
+import { DrawInfo } from '../types/Drawer'
+import { SchedulerEvent, SchedulerEventListener, ThreadEvent, ThreadEventListenr, ThreadStatus } from '../types/Scheduler'
 
 export interface IThread {
+    readonly id: string
     readonly status: ThreadStatus
-
-    setStatus(status: ThreadStatus): void
+    on(evt: ThreadEvent, listener: ThreadEventListenr): void
+    post(data: DrawInfo[]): void
 }
 
 interface IScheduler {
-    work(): void
-    commit(): void
+    on(evt: SchedulerEvent, listener: SchedulerEventListener): void
+    reconciler(data: DrawInfo[]): void
 }
 
 export default IScheduler

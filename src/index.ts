@@ -1,5 +1,5 @@
+import Rect from './core/figure/Rect'
 import Scene from './core/Scene'
-import Rect from './core/shape/Rect'
 import CanvasRenderer from './renderer/CanvasRenderer'
 
 const Ghost = {

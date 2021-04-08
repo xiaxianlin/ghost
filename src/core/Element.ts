@@ -1,53 +1,27 @@
-import { IPosition, ISize } from '../struct/interfaces/IAttribute'
 import { IElement } from '../struct/interfaces/ICore'
-import ITransform from '../struct/interfaces/ITransform'
 import { Visitor } from '../struct/types/Common'
+import { DrawInfo } from '../struct/types/Drawer'
 import { BroadcastChannel } from '../struct/types/Tool'
 import Broadcast from '../tool/Broadcast'
 import StringUtils from '../utils/StringUtils'
-import Position from './attribute/Postion'
-import Size from './attribute/Size'
-import Transform from './transform/Transform'
 
-class Element implements IElement {
-    protected prefix = ''
+abstract class Element implements IElement {
+    protected changed: boolean = true
+
     id: string
-    children: IElement[]
-    parent: IElement | null
-    visible: boolean
-    inScreen: boolean
-    size: ISize
-    transform: ITransform
-    relativePosition: IPosition
-    absolutePosition: IPosition
+    x: number = 0
+    y: number = 0
+    width: number = 0
+    height: number = 0
+    parent: IElement | null = null
+    children: IElement[] = []
+
+    visible: boolean = true
+    inScreen: boolean = true
     isElement: boolean = true
 
     constructor() {
-        this.id = this.prefix + StringUtils.idGenerator(6)
-        this.children = []
-        this.parent = null
-        this.visible = true
-        this.inScreen = true
-        this.size = new Size()
-        this.transform = new Transform()
-        this.relativePosition = new Position()
-        this.absolutePosition = new Position()
-    }
-
-    setId(id: string) {
-        this.id = this.prefix + id
-    }
-
-    setSize(width: number, height: number): void {
-        this.size.setSize(width, height)
-    }
-
-    setVisible(visible: boolean): void {
-        this.visible = visible
-    }
-
-    setParent(parent: IElement): void {
-        this.parent = parent
+        this.id = StringUtils.idGenerator(8)
     }
 
     add(element: IElement): void {
@@ -59,9 +33,10 @@ class Element implements IElement {
             if (element.parent !== null) {
                 element.parent.remove(element)
             }
-            element.setParent(this)
+            element.parent = this
             this.children.push(element)
-            Broadcast.send(BroadcastChannel.ELEMENT_ADD, element)
+            Broadcast.send(BroadcastChannel.ELEMENT, { type: BroadcastChannel.ELEMENT_ADD, data: element })
+            this.changed = true
         } else {
             throw new Error('Element.add: element not an instance of Element.')
         }
@@ -69,28 +44,38 @@ class Element implements IElement {
 
     remove(element: IElement): void {
         let index = this.children.indexOf(element)
-        if (index !== -1) {
-            element.setParent(null)
-            this.children.splice(index, 1)
-            Broadcast.send(BroadcastChannel.ELEMENT_REMOVE, element)
-        }
+        if (index === -1) return
+        element.parent = null
+        this.children.splice(index, 1)
+        Broadcast.send(BroadcastChannel.ELEMENT, { type: BroadcastChannel.ELEMENT_REMOVE, data: element })
+        this.changed = true
     }
 
     clear(): void {
         for (let i = 0; i < this.children.length; i++) {
             let element = this.children[i]
-            element.setParent(null)
-            Broadcast.send(BroadcastChannel.ELEMENT_REMOVE, element)
+            element.parent = null
+            Broadcast.send(BroadcastChannel.ELEMENT, { type: BroadcastChannel.ELEMENT_REMOVE, data: element })
         }
         this.children = []
+        this.changed = true
     }
 
-    traverse(callback: Visitor<IElement>): void {
-        callback(this)
-        for (let i = 0, l = this.children.length; i < l; i++) {
-            this.children[i].traverse(callback)
+    traverse(callback: Visitor<IElement>, reverse = false): void {
+        if (reverse) {
+            for (let i = this.children.length - 1; i >= 0; i--) {
+                this.children[i].traverse(callback, reverse)
+            }
+            callback(this)
+        } else {
+            callback(this)
+            for (let i = 0; i < this.children.length; i++) {
+                this.children[i].traverse(callback, reverse)
+            }
         }
     }
+
+    abstract getDrawInfo(): DrawInfo | null
 }
 
 export default Element

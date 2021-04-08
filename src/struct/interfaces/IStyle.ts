@@ -27,8 +27,13 @@ export interface ITextStyle {
 }
 
 interface IStyle {
-    readonly border?: IBorder
-    readonly background?: IBackground
+    readonly style: {
+        readonly border?: IBorder
+        readonly background?: IBackground
+        readonly font?: IFont
+    }
+    setBorder(boder: IBorder): void
+    setBackground(background: IBackground): void
 }
 
 export default IStyle

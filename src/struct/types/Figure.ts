@@ -5,3 +5,5 @@ export type RectOptions = {
     width: number
     height: number
 }
+
+export type FigureImage = { id: string; image: ImageBitmap | null }

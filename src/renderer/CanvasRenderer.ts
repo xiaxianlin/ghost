@@ -1,10 +1,24 @@
-import Scene from '../core/Scene'
+import { IScene } from '../struct/interfaces/ICore'
 import { RendererOptions } from '../struct/types/Renderer'
+import Clocker from '../tool/Clocker'
 import Renderer from './Renderer'
 
 class CanvasRenderer extends Renderer {
     private canvas: HTMLCanvasElement
     private ctx: CanvasRenderingContext2D
+    private scene: IScene | null = null
+
+    protected handleComplete() {
+        Clocker.stop()
+        if (!this.scene) return
+        let { width, height } = this.canvas
+        this.ctx.clearRect(0, 0, width, height)
+        // this.scene.traverse((ele) => {
+        //     if (ele.image) {
+        //         this.ctx.drawImage(ele.image, ele.x, ele.y, width, height)
+        //     }
+        // }, true)
+    }
 
     constructor(container: HTMLElement | null, options?: RendererOptions) {
         super(container, options)
@@ -20,15 +34,11 @@ class CanvasRenderer extends Renderer {
         this.container.appendChild(this.canvas)
     }
 
-    getCanvas() {
-        return this.canvas
+    render(scene: IScene) {
+        Clocker.start()
+        this.scene = scene
+        this.factory.produce(scene)
     }
-
-    getContext() {
-        return this.ctx
-    }
-
-    render(scene: Scene) {}
 }
 
 export default CanvasRenderer

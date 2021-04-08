@@ -1,8 +1,8 @@
 import IAttribute from './IAttribute'
-import { IShape } from './ICore'
+import { IFigure } from './ICore'
 
 interface IDrawer {
-    draw(shape: IShape<IAttribute>): void
+    draw(shape: IFigure<IAttribute>): void
 }
 
 export default IDrawer
