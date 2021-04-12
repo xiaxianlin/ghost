@@ -1,3 +1,4 @@
+import Drawer from '../drawer/Drawer'
 import { IElement } from '../struct/interfaces/ICore'
 import { Visitor } from '../struct/types/Common'
 import { DrawInfo } from '../struct/types/Drawer'
@@ -15,10 +16,16 @@ abstract class Element implements IElement {
     height: number = 0
     parent: IElement | null = null
     children: IElement[] = []
+    image: ImageBitmap | null = null
 
     visible: boolean = true
     inScreen: boolean = true
     isElement: boolean = true
+
+    protected preCreateImage() {
+        let { canvas, context } = Drawer.gePublicOffscreenCanvas()
+        this.image = Drawer.drawByCtx(this.getDrawInfo(), canvas, context)
+    }
 
     constructor() {
         this.id = StringUtils.idGenerator(8)

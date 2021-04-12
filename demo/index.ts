@@ -13,9 +13,11 @@ const scene = new Scene()
 // scene.addShape(rect)
 
 // 大批量节点数据测试
-for (let i = 0; i < 8000; i++) {
+let now = Date.now()
+for (let i = 0; i < 800; i++) {
     const rect = new Rect({ x: Math.random() * 1348, y: Math.random() * 950, width: 20, height: 20 })
     scene.add(rect)
 }
+console.log(Date.now() - now, 'ms')
 // 渲染场景
 renderer.render(scene)

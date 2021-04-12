@@ -14,6 +14,7 @@ class Rect extends Figure<IRectAttribute> {
             this.height = height
             this.attribute = { width, height }
         }
+        // this.preCreateImage()
     }
 
     getDrawInfo(): DrawInfo {

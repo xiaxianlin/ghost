@@ -1,6 +1,6 @@
+import Drawer from '../drawer/Drawer'
 import { DrawInfo } from '../struct/types/Drawer'
 import { DrawerWorkerMessage, DrawerWorkerResult } from '../struct/types/Worker'
-import Drawer from './Drawer'
 const ctx: IDrawerWorkerContext<DrawerWorkerMessage, DrawerWorkerResult> = self as any
 
 let canvas: OffscreenCanvas
