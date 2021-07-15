@@ -41,7 +41,7 @@ module.exports = {
                 test: /\.ts$/,
                 loader: 'awesome-typescript-loader',
                 exclude: resolve(__dirname, 'node_modules'),
-                include: [resolve(__dirname, 'src'), resolve(__dirname, 'framework'), resolve(__dirname, 'typings')],
+                include: [resolve(__dirname, 'src'), resolve(__dirname, 'framework'), resolve(__dirname, 'typings'), resolve(__dirname, 'demo')],
             },
             {
                 enforce: 'pre',

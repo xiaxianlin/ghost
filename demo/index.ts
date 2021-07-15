@@ -1,23 +1,21 @@
-import Ghost from '../src'
+import DrawerBuilder from '../src/drawer'
+import Rect from '../src/shape/Rect'
 
-const { Rect, Renderer, Scene } = Ghost
+let canvas = document.createElement('canvas')
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+document.body.appendChild(canvas)
 
-// 创建渲染器
-const renderer = new Renderer(document.querySelector('#root'))
+let ctx = canvas.getContext('2d')
 
-// 创建场景
-const scene = new Scene()
+let drawer = DrawerBuilder.create(ctx)
 
-// // 创建矩形
-// const rect = new Rect({ x: 100, y: 100, width: 400, height: 300 })
-// scene.addShape(rect)
+let rect = new Rect({
+    x: 100,
+    y: 100,
+    width: 300,
+    height: 200,
+    radius: 50,
+})
 
-// 大批量节点数据测试
-let now = Date.now()
-for (let i = 0; i < 800; i++) {
-    const rect = new Rect({ x: Math.random() * 1348, y: Math.random() * 950, width: 20, height: 20 })
-    scene.add(rect)
-}
-console.log(Date.now() - now, 'ms')
-// 渲染场景
-renderer.render(scene)
+drawer.drawPath(rect.getDrawInfo(), { strokeStyle: 'red', lineWidth: 10, fillStyle: 'yellow' })
